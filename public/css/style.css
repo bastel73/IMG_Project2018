@@ -1,3 +1,7 @@
 body{
     background-image: url(../images/headerImage.jpg);
 }
+
+h1{
+    color: tomato;
+}

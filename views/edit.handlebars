@@ -1,0 +1,22 @@
+{{#each errors}}
+    <div class="alert alert-danger">{{text}}</div>
+{{else}}
+
+{{/each}}
+<div class="card card-body">
+    <h3>Edit Player</h3>
+    <form action="/players/{{player.id}}?_method=PUT" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+        <div class="form-group">
+            <label for="playerID">Spielernummer</label>
+            <input type="number" class="form-control" name="playerID" value="{{player.playerID}}">
+            <label for="lastName">Nachname</label>
+            <input type="text" class="form-control" name="lastName" value="{{player.lastName}}">
+            <label for="firstName">Vorname</label>
+            <input type="text" class="form-control" name="firstName" value="{{player.firstName}}">
+            <label for="dateOfBirth">Geburtsdatum</label>
+            <input type="date" class="form-control" id="dateOrder" name="dateOfBirth">            
+        </div>
+        <button type="submit" class="btn btn-primary">Speichern</button>
+    </form>
+</div>

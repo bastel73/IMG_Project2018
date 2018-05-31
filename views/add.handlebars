@@ -1,6 +1,11 @@
+{{#each errors}}
+    <div class="alert alert-danger">{{text}}</div>
+{{else}}
+
+{{/each}}
 <div class="card card-body">
     <h3>Player</h3>
-    <form action="/player" method="POST">
+    <form action="/add" method="POST">
         <div class="form-group">
             <label for="playerID">Spielernummer</label>
             <input type="number" class="form-control" name="playerID">
