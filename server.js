@@ -26,7 +26,7 @@ const httpsOptions = {
 };
 
 https.createServer(httpsOptions, server).listen(port, () => {
-  console.log("Serving on Port ${port}");
+  console.log(`Serving on Port ${port}`);
 });
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
@@ -45,7 +45,7 @@ const Player = mongoose.model("player");
 server.engine(
   "handlebars",
   exphbs({
-    extname: "hbs",
+    extname: ".hbs",
     defaultLayout: "main"
   })
 );
@@ -59,10 +59,26 @@ server.use(methodOverride("_method"));
 
 // Index Route
 server.get("/", (req, res) => {
-  const title = "Moin !";
+  const title = "Moin !";  
   res.render("index", {
     title: title
   });
+});
+
+// get data for indexedDB Route
+server.get("/getData", (req, res, next) => {
+  
+  Player.find({})
+    .sort({ lastName: "asc" })
+    .then(players=>{
+      
+      res.json(players);
+            
+    })
+    .catch(err => {      
+      return next(err);
+    });  
+  
 });
 
 // About Route
@@ -75,6 +91,7 @@ server.get("/players", (req, res) => {
   Player.find({})
     .sort({ lastName: "asc" })
     .then(players => {
+      
       res.render("indexOfPlayers", {
         players: players
       })
